@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="container">
       <Navbar />
-      <main>
+      <main className="main-content">
         <Outlet />
       </main>
     </div>

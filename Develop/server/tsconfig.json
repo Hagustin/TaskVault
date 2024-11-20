@@ -2,7 +2,11 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     /* Modules */
-    "rootDir": "src", /* Specify the root folder for your source files. */
+    "moduleResolution": "node", /* Use Node.js module resolution */
+    "module": "commonjs", /* Ensure compatibility with Node.js */
+
+    /* Root Directory */
+    "rootDir": "./", /* Specify the root folder for your files. */
 
     /* Emit */
     "outDir": "dist", /* Specify an output folder for all emitted files. */
@@ -14,5 +18,5 @@
     /* Include Custom Types */
     "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "include": ["src", "types"] /* Ensure TypeScript includes the source and custom type folders. */
+  "include": ["src", "seeds", "types"] /* Ensure TypeScript includes seeds and types folders. */
 }
