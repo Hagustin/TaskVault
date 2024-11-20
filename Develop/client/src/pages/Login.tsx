@@ -1,55 +1,57 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { login } from '../api/authAPI';
+import AuthService from '../utils/auth';
+import logo from '../assets/task-vault-high-resolution-logo-transparent.png';
 
-import Auth from '../utils/auth';
-import { login } from "../api/authAPI";
+const Login: React.FC = () => {
+  const [credentials, setCredentials] = useState({ username: '', password: '' });
+  const [error, setError] = useState('');
+  const { state } = useLocation();
+  const navigate = useNavigate();
 
-const Login = () => {
-  const [loginData, setLoginData] = useState({
-    username: '',
-    password: ''
-  });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setLoginData({
-      ...loginData,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const data = await login(loginData);
-      Auth.login(data.token);
+      const { token } = await login(credentials);
+      AuthService.login(token);
+      navigate('/');
     } catch (err) {
-      console.error('Failed to login', err);
+      setError('Invalid username or password');
     }
   };
 
   return (
-    <div className='container'>
-      <form className='form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <label >Username</label>
-        <input 
-          type='text'
-          name='username'
-          value={loginData.username || ''}
-          onChange={handleChange}
-        />
-      <label>Password</label>
-        <input 
-          type='password'
-          name='password'
-          value={loginData.password || ''}
-          onChange={handleChange}
-        />
-        <button type='submit'>Submit Form</button>
-      </form>
+    <div className="page">
+      <div className="login-box">
+        <img src={logo} alt="App Logo" className="logo" />
+        {state?.sessionExpired && (
+          <p className="error-message">Your session has expired. Please log in again.</p>
+        )}
+        <h1>Welcome Back!</h1>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            placeholder="Enter your username"
+            value={credentials.username}
+            onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            value={credentials.password}
+            onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+          />
+          {error && <p className="error-message">{error}</p>}
+          <button type="submit">Login</button>
+        </form>
+      </div>
     </div>
-    
-  )
+  );
 };
 
 export default Login;

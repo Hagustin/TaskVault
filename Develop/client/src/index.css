@@ -12,6 +12,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 :root {
   --primary-color: #b864c4;
   --secondary-color: #e9cbec;
@@ -106,7 +115,13 @@ tbody tr:nth-child(odd) {
 /* Navbar Content */
 .nav {
   display: flex;
-  padding: 1em 2em;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  width: 100%;
+  background-color: #1a1a1a;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav ul {
@@ -115,27 +130,61 @@ tbody tr:nth-child(odd) {
   flex-direction: row;
 }
 
-.nav-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: larger;
-  font-weight: 900;
+.nav-title a {
+  text-decoration: none;
+  color: #b864c4;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
+
 .nav-title a {
+  text-decoration: none;
   color: #b864c4;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-button {
+  background-color: transparent;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #b864c4;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-item {
-  display: block;
-  margin-left: auto;
-  list-style: none;
+  display: flex;
+  align-items: center;
 }
 
 .nav-link {
-  color: #fff;
   text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #b864c4;
 }
 
 .active {
@@ -149,20 +198,27 @@ tbody tr:nth-child(odd) {
 
 .board {
   width: 100%;
+  max-width: 90%; /* Optional: Adjust the width limit */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .board-display {
   display: flex;
+  flex: 1; /* Allow swimlanes to occupy available space */
+  justify-content: space-between;
+  gap: 1rem; /* Add spacing between swimlanes */
 }
 
 .swim-lane {
-  text-align: center;
-  font-weight: 500;
-  width: 33%;
-  height: 90vh; 
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  margin: 5px;
-  padding: 5px;
+  flex: 1; /* Ensure swimlanes stretch equally */
+  min-height: 80vh;
+  margin: 0.5rem; /* Optional: spacing around lanes */
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .todo {
@@ -178,24 +234,61 @@ tbody tr:nth-child(odd) {
 }
 
 .ticket-card {
-  text-align: left;
+  width: 100%;
   background-color: #fff;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border: 0.1em solid black;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem; /* Space between tickets */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Card title styling */
+.ticket-card h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #333;
+}
+
+/* Card description styling */
+.ticket-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
 }
 
 .container {
-  /* margin: auto; */
+  flex: 1; /* Allow the container to stretch to fill space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to the top */
+}
+
+.main-content {
+  flex: 1;
   width: 100%;
-  /* height: 90%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background: #ecf0f1; /* Consistent background color */
 }
 
 #create-ticket-link {
-  display: block;
-  margin-left: auto;
+  margin-bottom: 1rem;
 }
 
 
@@ -252,12 +345,20 @@ tbody tr:nth-child(odd) {
 }
 
 .editBtn {
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  transition: border-color 0.25s;
+  text-decoration: none;
+  text-align: center;
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.editBtn:hover {
+  background-color: #0056b3;
 }
 
 button:focus,
@@ -267,21 +368,103 @@ a:focus {
 
 
 .deleteBtn {
-  background-color: #f9f9f9;
-  font-weight: 500;
-  color: black;
-  text-decoration: inherit;
+  background-color: #dc3545;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .deleteBtn:hover {
-  color: #535bf2;
+  background-color: #a71d2a;
 }
+
+/* Limit the size of the logo */
+.logo {
+  width: 150px; /* Adjust this size as needed */
+  height: auto; /* Maintain aspect ratio */
+  display: block;
+  margin: 0 auto 1rem; /* Center the logo and add space below it */
+}
+
+
 
 .login-notice {
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
+}
+
+/* General page styling */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(to right, #6a11cb, #2575fc); /* Optional background styling */
+}
+
+.login-box {
+  background: white;
+  padding: 2rem 3rem; /* Increase padding for a more spacious feel */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 400px; /* Increase width */
+  max-width: 90%; /* Ensure responsiveness */
+  text-align: center;
+}
+
+.login-box h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #333;
+}
+
+.login-box label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.login-box input:focus {
+  border-color: #6a11cb;
+  outline: none;
+}
+
+button {
+  background-color: #6a11cb;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2575fc;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
 }
 
 .error-message {
@@ -292,26 +475,85 @@ a:focus {
 }
 
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@media (max-width: 768px) {
+  /* Make the board layout stack vertically */
+  .board-display {
+    flex-direction: column; /* Stack swimlanes vertically */
+    align-items: center;
+    gap: 1rem; /* Add spacing between swimlanes */
   }
-  a:hover {
-    color: #747bff;
+
+  /* Adjust swim-lane styling for smaller screens */
+  .swim-lane {
+    width: 100%; /* Take full width */
+    min-height: auto; /* Adjust height dynamically */
   }
-  button {
-    background-color: #f9f9f9;
+
+  /* Responsive styles for the login page */
+  .login-box {
+    width: 90%; /* Use the majority of the screen for smaller devices */
+    padding: 1.5rem;
+  }
+
+  .logo {
+    width: 80px; /* Smaller logo for smaller screens */
+  }
+
+  .login-page {
+    padding: 1rem;
+  }
+  .ticket-card {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .editBtn,
+  .deleteBtn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .nav-title {
+    margin-bottom: 1rem;
   }
 }
 
-@media (max-width: 768px) {
-  .board-display {
-    flex-direction: column;
+@media (max-width: 480px) {
+  /* Login box adjustments for very small screens */
+  .login-box {
+    padding: 1rem; /* Reduce padding even more */
   }
+
+  .logo {
+    width: 60px; /* Smaller logo for very small screens */
+  }
+
+  input,
+  button {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+  }
+
+  /* Adjust swim-lane styling further for very small screens */
   .swim-lane {
     width: 100%;
-    height: auto;
+    margin-bottom: 1rem; /* Add spacing between lanes */
+  }
+
+  /* Ensure create ticket button stays visible */
+  #create-ticket-link {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
   }
 }
-

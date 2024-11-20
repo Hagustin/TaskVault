@@ -5,6 +5,7 @@ export interface TicketData {
   name: string | null;
   description: string | null;
   status: string | null;
-  assignedUserId: number | null;
+  assignedUserId?: number | null; // Allow undefined
   assignedUser: UserData | null;
 }
+

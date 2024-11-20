@@ -8,7 +8,12 @@ interface CustomJwtPayload {
 }
 
 export const authenticateToken = (req: Request, res: Response, next: NextFunction): void => {
+  // Debug log to confirm JWT_SECRET_KEY
+  console.log('JWT_SECRET_KEY:', process.env.JWT_SECRET_KEY);
+  
+
   const authHeader = req.headers['authorization'];
+  console.log('Authorization Header:', authHeader); // Debug log
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
@@ -16,14 +21,18 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
     return;
   }
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET_KEY as string, (err, decoded) => {
     if (err) {
+      console.error('JWT Verification Error:', err.message);
+      console.log('JWT verification failed:', err); // Debug log
+      console.log('Token:', token); // Debug log
       res.status(403).json({ message: 'Forbidden' }); // Handle invalid token
       return;
     }
 
     const user = decoded as CustomJwtPayload; // Use renamed interface
     req.user = { id: user.id, username: user.username };
+    console.log('Decoded User:', req.user); // Debug log
     next(); // Proceed to the next middleware
   });
 };
