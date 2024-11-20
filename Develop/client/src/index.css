@@ -12,6 +12,25 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+:root {
+  --primary-color: #b864c4;
+  --secondary-color: #e9cbec;
+  --dark-color: #732381;
+  --light-color: #f9f9f9;
+}
+
+.todo {
+  background-color: var(--secondary-color);
+}
+
+.inprogress {
+  background-color: var(--primary-color);
+}
+
+.done {
+  background-color: var(--dark-color);
+}
+
 /* webkit solution */
 ::-webkit-input-placeholder { 
   text-align:right; 
@@ -191,6 +210,23 @@ tbody tr:nth-child(odd) {
   align-items: center;
 }
 
+.form input,
+.form textarea {
+  padding: 8px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  transition: border-color 0.25s;
+}
+
+.form input:focus,
+.form textarea:focus {
+  border-color: #b864c4;
+  outline: none;
+}
+
+
 .form > h1, .form > label {
   color: yellow;
 }
@@ -224,6 +260,12 @@ tbody tr:nth-child(odd) {
   transition: border-color 0.25s;
 }
 
+button:focus,
+a:focus {
+  outline: 3px solid #646cff;
+}
+
+
 .deleteBtn {
   background-color: #f9f9f9;
   font-weight: 500;
@@ -242,6 +284,13 @@ tbody tr:nth-child(odd) {
   justify-content: center;
 }
 
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -255,3 +304,14 @@ tbody tr:nth-child(odd) {
     background-color: #f9f9f9;
   }
 }
+
+@media (max-width: 768px) {
+  .board-display {
+    flex-direction: column;
+  }
+  .swim-lane {
+    width: 100%;
+    height: auto;
+  }
+}
+
