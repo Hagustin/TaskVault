@@ -1,13 +1,18 @@
 {
-    "extends": "../tsconfig.json",
-    "compilerOptions": {
-      /* Modules */
-      "rootDir": "src" /* Specify the root folder within your source files. */,
-  
-      /* Emit */
-      "outDir": "dist" /* Specify an output folder for all emitted files. */
-      // "noEmitOnError": true /* Disable emitting files if any type checking errors are reported. */
-    },
-    "include": ["src"],
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    /* Modules */
+    "rootDir": "src", /* Specify the root folder for your source files. */
+
+    /* Emit */
+    "outDir": "dist", /* Specify an output folder for all emitted files. */
+
+    /* TypeScript Options */
+    "esModuleInterop": true, /* Enables compatibility with CommonJS modules */
+    "strict": true, /* Enable strict type-checking options */
+
+    /* Include Custom Types */
+    "typeRoots": ["./node_modules/@types", "./types"]
+  },
+  "include": ["src", "types"] /* Ensure TypeScript includes the source and custom type folders. */
 }
