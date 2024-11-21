@@ -1,4 +1,4 @@
 export interface UserData {
-  id: number | undefined; // Allow undefined
+  id: number | null;
   username: string | null;
 }

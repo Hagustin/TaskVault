@@ -6,18 +6,22 @@ import {
   updateTicket,
   deleteTicket,
 } from '../../controllers/ticket-controller.js';
-import { authenticateToken } from '../../middleware/auth.js';
 
 const router = express.Router();
 
-// Public route: Get all tickets
-router.get('/', authenticateToken, getAllTickets);
+// GET /tickets - Get all tickets
+router.get('/', getAllTickets);
 
-// Secure the rest with authentication
-router.get('/:id', authenticateToken, getTicketById);
-router.post('/', authenticateToken, createTicket);
-router.put('/:id', authenticateToken, updateTicket);
-router.delete('/:id', authenticateToken, deleteTicket);
+// GET /tickets/:id - Get a ticket by id
+router.get('/:id', getTicketById);
+
+// POST /tickets - Create a new ticket
+router.post('/', createTicket);
+
+// PUT /tickets/:id - Update a ticket by id
+router.put('/:id', updateTicket);
+
+// DELETE /tickets/:id - Delete a ticket by id
+router.delete('/:id', deleteTicket);
 
 export { router as ticketRouter };
-

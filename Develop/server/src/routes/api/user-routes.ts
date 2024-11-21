@@ -5,20 +5,23 @@ import {
   createUser,
   updateUser,
   deleteUser,
-} 
-from '../../controllers/user-controller.js';
-import { authenticateToken } from '../../middleware/auth.js';
+} from '../../controllers/user-controller.js';
 
 const router = express.Router();
 
-// Public route: Get all users (Example: if public directory is needed)
-router.get('/', authenticateToken, getAllUsers);
+// GET /users - Get all users
+router.get('/', getAllUsers);
 
-// Secure the rest with authentication
-router.get('/:id', authenticateToken, getUserById);
-router.post('/', authenticateToken, createUser);
-router.put('/:id', authenticateToken, updateUser);
-router.delete('/:id', authenticateToken, deleteUser);
+// GET /users/:id - Get a user by id
+router.get('/:id', getUserById);
+
+// POST /users - Create a new user
+router.post('/', createUser);
+
+// PUT /users/:id - Update a user by id
+router.put('/:id', updateUser);
+
+// DELETE /users/:id - Delete a user by id
+router.delete('/:id', deleteUser);
 
 export { router as userRouter };
-

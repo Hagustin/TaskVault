@@ -1,60 +1,71 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { login } from '../api/authAPI';
-import AuthService from '../utils/auth';
-import logo from '../assets/task-vault-high-resolution-logo-transparent.png';
+import { useState, FormEvent, ChangeEvent } from "react";
+import logo from "../assets/task-vault-high-resolution-logo-transparent.png";
+import Auth from '../utils/auth';
+import { login } from "../api/authAPI";
+import '../styles/Login.css';
 
-const Login: React.FC = () => {
-  const [credentials, setCredentials] = useState({ username: '', password: '' });
-  const [error, setError] = useState('');
-  const { state } = useLocation();
-  const navigate = useNavigate();
+const Login = () => {
+  const [loginData, setLoginData] = useState({
+    username: '',
+    password: ''
+  });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setLoginData({
+      ...loginData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const { token } = await login(credentials);
-      AuthService.login(token);
-      navigate('/');
+      const data = await login(loginData);
+      Auth.login(data.token);
     } catch (err) {
-      setError('Invalid username or password');
+      console.error('Failed to login', err);
     }
   };
 
   return (
-    <div className="page">
-      <div className="login-box">
-        <div className="logo-container">
-          <img src={logo} alt="App Logo" className="logo" />
+    <>
+      <nav className="nav">
+        <div className="nav-title">
+          <a href="/">Task Vault</a>
         </div>
-        {state?.sessionExpired && (
-          <p className="error-message">Your session has expired. Please log in again.</p>
-        )}
-        <h1>Welcome Back!</h1>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="username">Username</label>
+        <ul>
+          <li className="nav-item">
+            <a href="/about" className="nav-link">About</a>
+          </li>
+          <li className="nav-item">
+            <a href="/contact" className="nav-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+      <div className="container">
+        <form className="form" onSubmit={handleSubmit}>
+          <img src={logo} alt="Task Vault Logo" className="logo" />
+          <h1>Login</h1>
+          <label>Username</label>
           <input
-            id="username"
             type="text"
-            placeholder="Enter your username"
-            value={credentials.username}
-            onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+            name="username"
+            value={loginData.username || ""}
+            onChange={handleChange}
           />
-          <label htmlFor="password">Password</label>
+          <label>Password</label>
           <input
-            id="password"
             type="password"
-            placeholder="Enter your password"
-            value={credentials.password}
-            onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+            name="password"
+            value={loginData.password || ""}
+            onChange={handleChange}
           />
-          {error && <p className="error-message">{error}</p>}
-          <button type="submit">Login</button>
+          <button type="submit">Submit Form</button>
         </form>
       </div>
-    </div>
+    </>
   );
-  
 };
 
 export default Login;

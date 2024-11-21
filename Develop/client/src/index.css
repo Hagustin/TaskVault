@@ -5,32 +5,43 @@
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(0, 0, 0, 0.87); /* Text color */
+  color: rgba(0, 0, 0, 0.87); /* Neutral text color */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* New warm tones */
+  --warm-white: #f9f4ef;  /* Background */
+  --beige: #e7d8c9;       /* Subtle accents */
+  --grey: #737373;        /* Text and borders */
+  --wood: #a67c52;        /* Strong highlights */
+  --hover-wood: #8b6845;  /* Darker wood for hover states */
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+/* Webkit solution */
+::-webkit-input-placeholder {
+  text-align: right;
 }
 
-:root {
-  --primary-color: #b864c4;
-  --secondary-color: #e9cbec;
-  --dark-color: #732381;
-  --light-color: #f9f9f9;
+/* Mozilla solution */
+input:-moz-placeholder {
+  text-align: right;
 }
 
-/* Background and general page setup */
+a {
+  font-weight: 500;
+  color: var(--primary-color);
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: var(--hover-color);
+}
+
 body {
-  background: #f5f5f5; /* Light grey background */
+  background: var(--warm-white);
+  color: var(--grey);
   margin: 0;
   place-items: center;
   min-width: 320px;
@@ -41,405 +52,235 @@ body {
   flex-direction: column;
 }
 
-/* Navbar Styling */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  background-color: var(--wood);
+  color: white;
+  border-radius: 8px;
+  border: none;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--hover-wood);
+}
+
+
+button:hover {
+  background-color: var(--hover-color);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+main {
+  color: black;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+tr {
+  border-radius: 10px;
+  background-color: var(--navbar-color);
+  color: white;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #333333;
+}
+
+/* Navbar Content */
 .nav {
+  background-color: var(--beige);
+  color: var(--grey);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav ul {
+  display: flex;
+  margin-left: auto;
+  flex-direction: row;
+}
+
+.nav-title {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Align items to the left */
-  padding: 1rem 2rem;
-  width: 100%;
-  background-color: #1a1a1a;
-  color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: fixed; /* Fixed at top */
-  top: 0;
-  left: 0;
-  z-index: 10;
+  justify-content: center;
+  font-size: larger;
+  font-weight: 900;
 }
+
 .nav-title a {
-  text-decoration: none;
-  color: #b864c4;
-  font-size: 1.5rem;
-  font-weight: bold;
+  color: var(--wood);
 }
-
-.nav-list {
-  display: flex;
-  list-style: none;
-  margin-block-end: 1rem; /* Push the list to the right */
-}
-
 
 .nav-item {
+  display: block;
+  margin-left: auto;
   list-style: none;
-  display: flex;
-  align-items: center;
 }
 
 .nav-link {
+  color: var(--grey);
   text-decoration: none;
-  color: white;
-  font-weight: bold;
   padding: 0.5rem 1rem;
-  border-radius: 4px;
   transition: background-color 0.3s ease;
-  display: block; /* Ensure the link is block level so it can align properly */
 }
 
 .nav-link:hover {
-  background-color: #b864c4;
+  background-color: var(--beige);
+  color: var(--wood);
 }
 
-.main-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding-top: 5rem; /* Add space below navbar */
-  align-items: center;
-  width: 100%;
+.active {
+  font-weight: 700;
+}
+
+/* Table Styling */
+.table {
+  width: 80vw;
+  table-layout: fixed;
 }
 
 .board {
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  max-width: 1200px; /* Limit the board's width */
-  margin: 0 auto;
 }
 
-/* Swimlane Styling (Kanban Columns) */
 .board-display {
   display: flex;
-  flex: 1; /* Allow the container to take available space */
-  justify-content: space-between;
-  gap: 2rem;
-  flex-wrap: wrap; /* Allow swimlanes to wrap on smaller screens */
-  overflow-x: auto; /* Allow horizontal scroll if needed */
-  padding: 0 1rem; /* Add padding for some space around */
 }
 
 .swim-lane {
-  flex: 1;
-  min-height: 80vh;
-  margin: 1rem;
-  padding: 2rem;
-  border-radius: 8px;
-  background-color: #f9f9f9; /* Light background */
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Swimlane Header (Todo, In Progress, Done) */
-.swim-lane h2 {
-  font-size: 1.5rem;
-  color: #333; /* Dark grey text */
-  margin-bottom: 1rem;
   text-align: center;
+  font-weight: 500;
+  width: 33%;
+  height: 90vh;
+
+  margin: 5px;
+  padding: 5px;
+  background-color: var(--beige);
+  border: 1px solid var(--grey);
 }
 
-/* Todo, In Progress, Done color styles */
 .todo {
-  background-color: #f5f5f5; /* Light beige background */
-  border: 1px solid #ddd; /* Soft grey border */
+  background-color: var(--secondary-color);
 }
 
 .inprogress {
-  background-color: #d6e0f0; /* Soft blue-grey background */
-  border: 1px solid #a1b3c1; /* Subtle greyish blue border */
+  background-color: var(--primary-color);
 }
 
 .done {
-  background-color: #e8e8e8; /* Very light grey */
-  border: 1px solid #c6c6c6; /* Lighter grey border */
+  background-color: var(--hover-color);
+  color: white;
 }
 
-/* Ticket Card Styling */
 .ticket-card {
-  background-color: white;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  text-align: left;
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 0.1em solid black;
 }
 
-/* New Ticket Button */
-#new-ticket-button {
-  background-color: purple; /* Calming orange color */
-  color: white;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  transition: background-color 0.3s ease;
-  position: absolute; /* Position button at the top right */
-  top: 2rem; /* Space from the top */
-  right: 2rem; /* Space from the right edge */
-  z-index: 15; /* Ensure the button is above other elements */
+.container {
+  width: 100%;
 }
 
-#new-ticket-button:hover {
-  background-color: blueviolet; /* Darker orange on hover */
+#create-ticket-link {
+  display: block;
+  margin-left: auto;
 }
 
-#new-ticket-button a {
-  color: white; /* Ensure link text is white */
-  text-decoration: none; /* Remove underline */
-  text-decoration: ;
-}
-
-.page {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  min-height: 100vh; /* Full viewport height */
-  margin: 0;
-  background: #ECF0F1; /* Light background for the page */
-  padding: 0;
-}
-
-.logout-button {
-  margin-top: 20px; /* Add space above logout button */
-  align-self: flex-start; /* Align the button to the left or right depending on preference */
-  padding: 10px 20px;
-  background-color: #ff4d4d;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.logout-button:hover {
-  background-color: #cc0000;
-}
-
-/* Login Box Styling */
-.login-box {
-  background: white;
-  padding: 2rem 3rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  width: 400px; /* Set a fixed width */
-  max-width: 90%; /* Ensure responsiveness */
-  text-align: center;
+.form {
+  width: 60%;
+  height: 80%;
+  background-color: var(--primary-color);
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.form > h1,
+.form > label {
+  color: rgb(8, 79, 114);
+}
+
+.form > input {
+  width: 200px;
+}
+
+.form > label {
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  color:rgb(8, 4, 18)
+}
+
+.form button {
+  margin-top: 2.5%;
+}
+
+.form textarea {
+  resize: both;
+  min-height: 30px;
+  min-width: 30px;
+  background-color: #f9f4ef;
+  color:#213547;
+}
+
+.editBtn {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.deleteBtn {
+  background-color: #f9f9f9;
+  font-weight: 500;
+  color: black;
+  text-decoration: inherit;
+}
+
+.deleteBtn:hover {
+  color: #535bf2;
 }
 
 .login-notice {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  color: #333;
-}
-
-.login-box h1 {
-  margin-bottom: 1.5rem;
-  font-size: 2rem;
-  color: #333;
-}
-
-/* Logo Container Styling */
-.logo-container {
   width: 100%;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
-}
-
-/* Logo Styling */
-.logo {
-  max-width: 150px; /* Ensure the logo is not too large */
-  height: auto; /* Maintain aspect ratio */
-  display: block;
-  margin: 0 auto; /* Center logo */
-}
-
-
-/* Form Inputs and Button Styling */
-.login-box label {
-  display: block;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #555;
-}
-
-.login-box input {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-}
-
-.login-box input:focus {
-  border-color: #6a11cb;
-  outline: none;
-}
-
-button {
-  padding: 0.8rem 1.5rem;
-  background-color: #b864c4;
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
-}
-
-button:hover {
-  background-color: #9b4e99;
-}
-
-button:focus {
-  outline: 3px solid #b864c4;
-}
-
-
-/* Error Message Styling */
-.error-message {
-  color: red;
-  font-size: 1rem;
-  margin-top: 1rem;
-  text-align: center;
-}
-
-
-/* form */
-.container {
-  display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: #f7f7f7; /* Light background for form container */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 2rem;
-  margin-bottom: 2rem;
 }
 
-/* Form styling */
-.form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  font-size: 1.8rem;
-  color: #333;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-/* Label Styling */
-label {
-  font-size: 1rem;
-  color: #555;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-/* Textarea and Select Styling */
-textarea,
-select {
-  padding: 0.8rem;
-  font-size: 1rem;
-  border: 1px solid #4d4343;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-  resize: vertical; /* Allow vertical resizing for textareas */
-}
-
-textarea:focus,
-select:focus {
-  border-color: #b864c4; /* Highlight on focus */
-  outline: none;
-}
-
-select {
-  background-color: #0c076f;
-}
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .login-box {
-    width: 90%; /* Use the majority of the screen for smaller devices */
-    padding: 1.5rem;
+/* Light Theme Adjustment */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: var(--background-color);
   }
-
-  .logo {
-    width: 80px; /* Smaller logo for smaller screens */
+  a:hover {
+    color: var(--hover-color);
   }
-
-  .login-box {
-    width: 90%;
-    padding: 1.5rem;
-  }
-
-  .logo {
-    width: 80px;
-  }
-
-  .board-display {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #new-ticket-button {
-    font-size: 1rem; /* Adjust button size */
-    padding: 0.8rem 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .login-box {
-    padding: 1rem; /* Reduce padding even more */
-  }
-
-  .logo {
-    width: 60px; /* Smaller logo for very small screens */
-  }
-
-  input,
   button {
-    font-size: 0.9rem; /* Adjust font size for smaller screens */
-  }
-
-  .login-box {
-    padding: 1rem;
-  }
-
-  .logo {
-    width: 60px;
-  }
-
-  input,
-  button {
-    font-size: 0.9rem;
+    background-color: var(--secondary-color);
   }
 }

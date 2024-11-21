@@ -1,0 +1,97 @@
+/* General Button Styling */
+.button-group {
+    display: flex;
+    gap: 0.5rem; /* Spacing between buttons */
+    justify-content: flex-end; /* Align buttons to the right */
+  }
+
+
+.editBtn {
+    background-color: var(--beige); /* Soft beige */
+    color: var(--wood); /* Wood tone text */
+    border: 1px solid var(--wood); /* Subtle border */
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+
+.editBtn:hover {
+    background-color: var(--wood); /* Darker wood tone */
+    color: white; /* Contrast text */
+    transform: translateY(-2px); /* Slight "lift" effect on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  
+.btn {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--wood);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+  }
+
+
+  /* Delete Button */
+.deleteBtn {
+    background-color: #4f2d00; /* Vibrant red */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+  
+.deleteBtn:hover {
+    background-color: #931313a0; /* Darker red */
+    transform: translateY(-2px); /* Lift effect on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .btn:hover {
+    background-color: var(--hover-wood);
+  }
+  
+  .btn-link {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .btn-link:hover {
+    text-decoration: underline;
+  }
+
+.done {
+    background-color: var(--hover-color);
+    color: #100f0f;
+}
+  
+  /* Typography */
+  p {
+    color: black;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    .button-group {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        gap: 0.8rem; /* Increase spacing between buttons */
+        align-items: flex-start; /* Align to the left */
+      }
+  }
+  

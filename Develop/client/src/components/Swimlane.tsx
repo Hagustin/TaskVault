@@ -5,28 +5,28 @@ import { ApiMessage } from '../interfaces/ApiMessage';
 interface SwimlaneProps {
   title: string;
   tickets: TicketData[];
-  deleteTicket: (ticketId: number) => Promise<ApiMessage>;
+  deleteTicket: (ticketId: number) => Promise<ApiMessage>
 }
 
 const Swimlane = ({ title, tickets, deleteTicket }: SwimlaneProps) => {
   const getStatusClass = (status: string) => {
     switch (status) {
       case 'Todo':
-        return 'todo';
+        return 'swim-lane todo';
       case 'In Progress':
-        return 'inprogress';
+        return 'swim-lane inprogress';
       case 'Done':
-        return 'done';
+        return 'swim-lane done';
       default:
-        return '';
+        return 'swim-lane';
     }
   };
 
   return (
-    <div className={`swim-lane ${getStatusClass(title)}`}>
+    <div className={`swimlane ${getStatusClass(title)}`}>
       <h2>{title}</h2>
-      {tickets.map((ticket) => (
-        <TicketCard
+      {tickets.map(ticket => (
+        <TicketCard 
           key={ticket.id}
           ticket={ticket}
           deleteTicket={deleteTicket}
@@ -37,4 +37,3 @@ const Swimlane = ({ title, tickets, deleteTicket }: SwimlaneProps) => {
 };
 
 export default Swimlane;
-

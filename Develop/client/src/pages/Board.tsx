@@ -1,6 +1,6 @@
 import { useEffect, useState, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import '../styles/Board.css';
 import { retrieveTickets, deleteTicket } from '../api/ticketAPI';
 import ErrorPage from './ErrorPage';
 import Swimlane from '../components/Swimlane';
@@ -55,25 +55,30 @@ const Board = () => {
   if (error) {
     return <ErrorPage />;
   }
+
   return (
-    <div className="page">
+    <>
       {!loginCheck ? (
         <div className="login-notice">
           <h1>Login to create & view tickets</h1>
         </div>
       ) : (
         <div className="board">
-          <button type="button" id="new-ticket-button">
-            <Link to="/create">New Ticket</Link>
+          <button type="button" id="create-ticket-link" className="btn">
+            <Link to="/create" className="btn-link">
+              New Ticket
+            </Link>
           </button>
           <div className="board-display">
             {boardStates.map((status) => {
-              const filteredTickets = tickets.filter((ticket) => ticket.status === status);
+              const filteredTickets = tickets.filter(
+                (ticket) => ticket.status === status
+              );
               return (
-                <Swimlane 
-                  title={status} 
-                  key={status} 
-                  tickets={filteredTickets} 
+                <Swimlane
+                  title={status}
+                  key={status}
+                  tickets={filteredTickets}
                   deleteTicket={deleteIndvTicket}
                 />
               );
@@ -81,9 +86,8 @@ const Board = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
-  
 };
 
 export default Board;

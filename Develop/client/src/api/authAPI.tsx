@@ -1,10 +1,7 @@
-import { UserLogin } from "../interfaces/UserLogin";
+import { UserLogin } from '../interfaces/UserLogin';
 
-interface LoginResponse {
-  token: string; // Define the structure of the login response
-}
-
-const login = async (userInfo: UserLogin): Promise<LoginResponse> => {
+const login = async (userInfo: UserLogin) => {
+  // TODO: make a POST request to the login route
   try {
     const response = await fetch('/auth/login', {
       method: 'POST',
@@ -14,18 +11,18 @@ const login = async (userInfo: UserLogin): Promise<LoginResponse> => {
       body: JSON.stringify(userInfo),
     });
 
-    const data = await response.json();
-
     if (!response.ok) {
-      throw new Error(data.message || 'Login failed. Check credentials.');
+      const errorData = await response.json();
+      throw new Error(`Error: ${errorData.message}`);
     }
 
-    return data; // This should return an object with the token property
+    const data = await response.json();
+
+    return data;
   } catch (err) {
-    console.error('Error in login:', err);
-    return Promise.reject('Failed to login. Please try again.');
+    console.error('Error from user lgin:, ', err);
+    return Promise.reject('Could not fetch user info');
   }
 };
 
 export { login };
-
