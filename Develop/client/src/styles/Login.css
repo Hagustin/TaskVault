@@ -1,0 +1,183 @@
+/* General Body Styling */
+body {
+    margin: 0;
+    font-family: 'Inter Tight', system-ui, Avenir, Helvetica, Arial, sans-serif;
+    background: var(--warm-white); /* Warm white background */
+    color: var(--grey); /* Neutral text color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+  
+  /* Navbar Styling */
+  .nav {
+    width: 100%;
+    background-color: var(--beige); /* Beige navbar background */
+    color: var(--grey);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed; /* Fix navbar at the top */
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+  
+  .nav-title a {
+    text-decoration: none;
+    color: var(--wood); /* Wood tone for the logo link */
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  .nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-item {
+    margin-left: 1rem;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: var(--grey);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background-color: var(--beige);
+    color: var(--wood);
+  }
+  
+  /* Container and Form Styling */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 5rem; /* Space for the fixed navbar */
+    width: 100%;
+    box-sizing: border-box; /* Prevent horizontal overflow */
+  }
+  
+  .form {
+    background-color: var(--beige); /* Subtle beige form background */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  /* Logo Styling */
+  .logo {
+    max-width: 150px; /* Adjusted for a larger logo */
+    height: auto;
+    margin: 0 auto 1.5rem auto; /* Center the logo and add spacing below */
+    display: block;
+  }
+  
+  /* Typography and Form Elements */
+  h1 {
+    margin-bottom: 1rem;
+    color: black; /* Change heading color to black */
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: black; /* Change label color to black */
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--grey);
+    background: rgb(47, 98, 141); /* Change input background to white */
+    font-size: 1rem;
+  }
+  
+  input:focus {
+    border-color: var(--wood);
+    outline: none;
+  }
+  
+  button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--wood);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: var(--hover-wood);
+  }
+  
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    .nav {
+      flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+      padding: 1rem;
+    }
+  
+    .nav-title {
+      flex: 1;
+      text-align: center; /* Center the logo */
+      margin-bottom: 0.5rem;
+    }
+  
+    .nav ul {
+      width: 100%;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+  
+    .nav-link {
+      padding: 0.5rem;
+    }
+  
+    .form {
+      padding: 1.5rem;
+      max-width: 90%; /* Use most of the screen width on smaller devices */
+    }
+  
+    .logo {
+      max-width: 120px; /* Adjust logo size for smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .nav {
+      padding: 0.5rem;
+    }
+  
+    .form {
+      padding: 1rem;
+      max-width: 95%; /* Slightly more compact for very small devices */
+    }
+  
+    .logo {
+      max-width: 100px; /* Further reduce logo size */
+    }
+  }
+  

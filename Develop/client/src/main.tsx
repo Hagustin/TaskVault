@@ -8,7 +8,6 @@ import ErrorPage from './pages/ErrorPage.tsx';
 import EditTicket from './pages/EditTicket.tsx';
 import CreateTicket from './pages/CreateTicket.tsx';
 import Login from './pages/Login.tsx';
-import ProtectedRoute from './ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -17,29 +16,24 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/login',
-        element: <Login />,
+        index: true,
+        element: <Board />
+      }, 
+      {
+        path: '/edit',
+        element: <EditTicket />
       },
       {
-        element: <ProtectedRoute />, // Protects all child routes
-        children: [
-          {
-            index: true,
-            element: <Board />,
-          },
-          {
-            path: '/edit',
-            element: <EditTicket />,
-          },
-          {
-            path: '/create',
-            element: <CreateTicket />,
-          },
-        ],
+        path: '/create',
+        element: <CreateTicket />
       },
-    ],
-  },
-]);
+      {
+        path: '/login',
+        element: <Login />
+      }
+    ]
+  }
+])
 
 const rootElement = document.getElementById('root');
 if (rootElement) {

@@ -1,56 +1,57 @@
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 class AuthService {
-  // Retrieves the user profile by decoding the JWT token
-  getProfile(): JwtPayload | null {
+  getProfile() {
+    // TODO: return the decoded token
     const token = this.getToken();
     if (token) {
-      try {
-        return jwtDecode<JwtPayload>(token);
-      } catch (error) {
-        console.error('Error decoding token:', error);
-        return null;
-      }
+      const decoded = jwtDecode<JwtPayload>(token);
+      return decoded;
     }
     return null;
   }
 
-  // Checks if the user is logged in by verifying that the token exists and is not expired
-  loggedIn(): boolean {
+  loggedIn() {
+    // TODO: return a value that indicates if the user is logged in
     const token = this.getToken();
-    return !!token && !this.isTokenExpired(token);
+    if (!token) {
+      return false;
+    }
+
+    return !this.isTokenExpired(token);
   }
 
-  // Checks if the token is expired based on the `exp` field in the JWT payload
-  isTokenExpired(token: string): boolean {
+  isTokenExpired(token: string) {
+    // TODO: return a value that indicates if the token is expired
     try {
-      const decoded = jwtDecode<JwtPayload>(token);
+      const decoded: JwtPayload = jwtDecode(token);
       if (decoded.exp) {
-        const currentTime = Date.now() / 1000; // Current time in seconds
-        return decoded.exp < currentTime; // If expired, return true
+        return Date.now() >= decoded.exp * 1000;
       }
-      return false; // If `exp` is not defined, assume it's not expired
+      return false;
     } catch (error) {
-      console.error('Error checking token expiration:', error);
-      return true; // If token is invalid, consider it expired
+      console.error('Error decoding token', error);
+      return true;
     }
   }
 
-  // Retrieves the token from localStorage
-  getToken(): string | null {
-    return localStorage.getItem('token');
+  getToken(): string {
+    // TODO: return the token
+    return localStorage.getItem('id_token') || '';
   }
 
-  // Saves the token in localStorage and redirects to home
-  login(idToken: string): void {
-    localStorage.setItem('token', idToken);
-    window.location.replace('/'); // Redirect to home page
+  login(idToken: string) {
+    // TODO: set the token to localStorage
+    // TODO: redirect to the home page
+    localStorage.setItem('id_token', idToken);
+    window.location.assign('/');
   }
 
-  // Clears the token from localStorage and redirects to login page
-  logout(): void {
-    localStorage.removeItem('token');
-    window.location.replace('/login'); // Redirect to login page
+  logout() {
+    // TODO: remove the token from localStorage
+    // TODO: redirect to the login page
+    localStorage.removeItem('id_token');
+    window.location.assign('/login');
   }
 }
 
