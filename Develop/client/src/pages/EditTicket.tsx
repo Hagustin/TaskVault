@@ -74,6 +74,7 @@ const EditTicket = () => {
             name="name"
             value={ticket.name || ''}
             onChange={handleTextAreaChange}
+            placeholder="Enter ticket name"
           />
           <label htmlFor="tStatus">Ticket Status</label>
           <select
@@ -92,6 +93,7 @@ const EditTicket = () => {
             name="description"
             value={ticket.description || ''}
             onChange={handleTextAreaChange}
+            placeholder="Enter ticket description"
           />
           <button type="submit">Submit Form</button>
         </form>

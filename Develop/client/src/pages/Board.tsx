@@ -63,26 +63,27 @@ const Board = () => {
         </div>
       ) : (
         <div className="board">
-          <button type="button" id="create-ticket-link">
+          <button type="button" id="new-ticket-button">
             <Link to="/create">New Ticket</Link>
           </button>
           <div className="board-display">
-  {boardStates.map((status) => {
-    const filteredTickets = tickets.filter((ticket) => ticket.status === status);
-    return (
-      <Swimlane 
-        title={status} 
-        key={status} 
-        tickets={filteredTickets} 
-        deleteTicket={deleteIndvTicket}
-      />
-    );
-  })}
-</div>
+            {boardStates.map((status) => {
+              const filteredTickets = tickets.filter((ticket) => ticket.status === status);
+              return (
+                <Swimlane 
+                  title={status} 
+                  key={status} 
+                  tickets={filteredTickets} 
+                  deleteTicket={deleteIndvTicket}
+                />
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
   );
+  
 };
 
 export default Board;
