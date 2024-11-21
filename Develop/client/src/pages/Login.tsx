@@ -24,7 +24,9 @@ const Login: React.FC = () => {
   return (
     <div className="page">
       <div className="login-box">
-        <img src={logo} alt="App Logo" className="logo" />
+        <div className="logo-container">
+          <img src={logo} alt="App Logo" className="logo" />
+        </div>
         {state?.sessionExpired && (
           <p className="error-message">Your session has expired. Please log in again.</p>
         )}
@@ -52,6 +54,7 @@ const Login: React.FC = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Login;
