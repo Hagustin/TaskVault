@@ -9,6 +9,7 @@ const Login = () => {
     username: '',
     password: ''
   });
+  const [error, setError] = useState<string | null>(null); // State to manage error messages
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -20,11 +21,13 @@ const Login = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setError(null); // Reset the error state before attempting login
     try {
       const data = await login(loginData);
       Auth.login(data.token);
     } catch (err) {
       console.error('Failed to login', err);
+      setError('Invalid username or password. Please try again.'); // Set error message
     }
   };
 
@@ -47,6 +50,7 @@ const Login = () => {
         <form className="form" onSubmit={handleSubmit}>
           <img src={logo} alt="Task Vault Logo" className="logo" />
           <h1>Login</h1>
+          {error && <p className="error-message">{error}</p>} {/* Display error message */}
           <label>Username</label>
           <input
             type="text"
